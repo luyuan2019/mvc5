@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+  
+</head>
+<body>
+
+    <div>
+        @ViewBag.LoginState
+    </div>
+
+    <div> 
+        <form action="/account/index" method="post">
+
+            <input type="text" id="user" placeholder="用户名" class="tyss2019" />
+            <div class="tyss2019" >asdfdas</div>
+            <button type="submit">登录</button>
+        </form>
+
+    </div>
+
+    <div>
+        @*在视图中加载分部视图*@
+        @Html.Partial("_Ts")
+        </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jquery")
+    }
+
+
+</body>
+</html>

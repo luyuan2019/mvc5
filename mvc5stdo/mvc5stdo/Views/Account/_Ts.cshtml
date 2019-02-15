@@ -1,0 +1,74 @@
+﻿@model IEnumerable<mvc5stdo.Models.Student>
+<table class="myTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+@*通过Json返回数据到前端*@
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //前台通过Jquery中的getJson方法，调用控制器中的方法，加载数据
+        $.getJSON("/Account/_StudentList?utd=你好&y=小姐", function (data) {
+            var tr;
+            //把每一行的数据加到table中
+            //注意：js中智能提示不完全：i < data.length;,,data[i].Name....
+            for (var i = 0; i < data.length; i++) {
+                tr = $("<tr/>");
+                tr.append("<td>" + data[i].ID + "</td>");
+                tr.append("<td>" + data[i].Name + "</td>");
+                tr.append("<td>" + data[i].Age + "</td>");
+                tr.append("<td>" + data[i].Sex + "</td>");
+                //通过css找到table,把数据绑定到table中
+                $(".myTable").append(tr);
+            }
+
+        })
+
+
+
+        //$
+        //           .ajax({
+        //               url: "/Account/_StudentList",
+        //               type: 'GET',
+        //               data: {
+        //                   utd:"你好",
+        //                   y:"小姐"
+        //               },
+        //               //contentType : 'application/json',
+        //               success: function (data, status, xhr) {
+
+        //                   var tr;
+        //                   //把每一行的数据加到table中
+        //                   //注意：js中智能提示不完全：i < data.length;,,data[i].Name....
+        //                   for (var i = 0; i < data.length; i++) {
+        //                       tr = $("<tr/>");
+        //                       tr.append("<td>" + data[i].ID + "</td>");
+        //                       tr.append("<td>" + data[i].Name + "</td>");
+        //                       tr.append("<td>" + data[i].Age + "</td>");
+        //                       tr.append("<td>" + data[i].Sex + "</td>");
+        //                       //通过css找到table,把数据绑定到table中
+        //                       $(".myTable").append(tr);
+        //                   }
+
+
+        //               },
+        //               Error: function (xhr, error, exception) {
+        //                   //alert('加载出错')
+        //               }
+        //           });
+
+
+
+
+
+    })
+</script>
+
