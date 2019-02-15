@@ -11,6 +11,62 @@
     <title>Index</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
+
+
+    <script type="text/javascript">
+
+        var picString = "";
+
+        $(document).ready(function () {
+
+            $("#picAjax").change(function (e) {
+                var file = e.delegateTarget.files[0];
+                if (file.type == 'image/jpeg' || file.type == 'image/png') {
+                    $("#uploadInfo").text("图片格式正确，请点击提交按钮");
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (ret) {
+                        picString = reader.result;
+                        //预览图片
+                        $("#selImg").attr({ "src": picString });
+                    }
+                }
+                else {
+                    $("#uploadInfo").text("请上传jpg或png格式的图片！");
+                }
+            });
+
+
+            $("#submitPic").click(function () {
+                if (picString != "") {
+                    $.ajax("/account/SavePicture", {
+                        type: "post",
+                        datatype: "json",
+                        data: {
+                            picString: picString,
+                            id: 123
+                        },
+                        error: function () {
+                            alert('no')
+                        },
+                        success: function (result) {
+                            alert('ok')
+                            if (result.suc == true) {
+                                $("#uploadInfo").text("图片上传成功！");
+                                $("#ImageList").empty();
+                                ReadPicture();
+                            }
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+        })
+    </script>
   
 </head>
 <body>
@@ -28,6 +84,19 @@
         </form>
 
     </div>
+
+
+
+
+    <div class="leftImage">
+        <input type="file" id="picAjax" class="customButton" />
+        <span id="uploadInfo"></span>
+        <input type="button" id="submitPic" class="customButton" value="上传" />
+    </div>
+    <div class="rightImage">
+        <img id="selImg" src="" alt="" />
+    </div>
+
 
     <div>
         @*在视图中加载分部视图*@
