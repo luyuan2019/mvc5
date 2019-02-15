@@ -87,6 +87,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\tts.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
